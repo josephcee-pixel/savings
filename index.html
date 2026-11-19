@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Akiba – Saving planner</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="auth" class="auth">
+  <section class="intro">
+    <h1>Know where every shilling goes.</h1>
+    <p>Log your income and spending, set a limit for each category, and get plain-language corrections the moment your money drifts off plan.</p>
+  </section>
+  <section class="auth-card">
+    <div class="tabs">
+      <button type="button" id="tLogin" class="on">Log in</button>
+      <button type="button" id="tSignup">Create account</button>
+    </div>
+    <form id="authForm" novalidate>
+      <label id="nameRow" hidden>Your name<input id="aName" autocomplete="name"></label>
+      <label>Email<input id="aEmail" type="email" autocomplete="email"></label>
+      <label>Password<input id="aPass" type="password" autocomplete="current-password"></label>
+      <p id="authErr" class="err" role="alert"></p>
+      <button class="btn" id="authBtn">Log in</button>
+    </form>
+    <p class="note">Accounts and data are saved in this browser, on this computer only.</p>
+  </section>
+</div>
+
+<div id="app" class="shell" hidden>
+  <aside class="side">
+    <div class="brand">Akiba</div>
+    <nav id="nav">
+      <button data-view="overview" class="on">Overview</button>
+      <button data-view="tx">Transactions</button>
+      <button data-view="budgets">Budgets</button>
+      <button data-view="goals">Goals</button>
+    </nav>
+    <div class="side-foot"><span id="who"></span><button class="link" id="out">Sign out</button></div>
+  </aside>
+
+  <main class="main">
+    <header class="top">
+      <h2 id="title">Overview</h2>
+      <div class="ctl">
+        <label>Month<input type="month" id="month"></label>
+        <label>Currency<select id="cur"></select></label>
+      </div>
+    </header>
+
+    <section id="v-overview" class="view"></section>
+
+    <section id="v-tx" class="view" hidden>
+      <form id="txForm" class="card form">
+        <div class="seg">
+          <label><input type="radio" name="type" value="out" checked><span>Expense</span></label>
+          <label><input type="radio" name="type" value="in"><span>Income</span></label>
+        </div>
+        <label>Amount<input id="txAmt" type="number" min="0" step="any" inputmode="decimal"></label>
+        <label>Category<select id="txCat"></select></label>
+        <label>Date<input id="txDate" type="date"></label>
+        <label>Note<input id="txNote" maxlength="60" placeholder="Optional"></label>
+        <button class="btn">Add transaction</button>
+      </form>
+      <div id="txList" class="card"></div>
+    </section>
+
+    <section id="v-budgets" class="view" hidden></section>
+
+    <section id="v-goals" class="view" hidden>
+      <form id="goalForm" class="card form">
+        <label>Goal name<input id="gName" maxlength="40" placeholder="Laptop, emergency fund…"></label>
+        <label>Target amount<input id="gTarget" type="number" min="0" step="any" inputmode="decimal"></label>
+        <label>Saved so far<input id="gSaved" type="number" min="0" step="any" inputmode="decimal" placeholder="0"></label>
+        <label>Target date<input id="gDate" type="date"></label>
+        <button class="btn">Add goal</button>
+      </form>
+      <div id="goalList" class="goals"></div>
+    </section>
+  </main>
+</div>
+
+<div id="toast" role="status"></div>
+<script src="app.js"></script>
+</body>
+</html>
